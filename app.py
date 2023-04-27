@@ -3,14 +3,14 @@ import string
 
 def msgEncrypt(mymsg):
     check = string.ascii_letters + string.punctuation + string.digits + " "
-    encryptedmsg = "".join([check[check.find(char)+1] for i,char in enumerate(mymsg)])
+    encryptedmsg = "".join([check[check.find(char)+1] if len(check) > (check.find(char)+1) else check[0] for i,char in enumerate(mymsg)])
     #print(encryptedmsg)
     return encryptedmsg
 
 class TestEncryption(unittest.TestCase):
     
     def setUp(self):                            
-        self.mymsg = "Hello batman"                      # assigned mymsg to pass the first unit
+        self.mymsg = "This is our moon!!! 999"                      # assigned mymsg to pass the first unit
     
     #we will do all the tests here
     #Test 1 checking if value is assignmed to the argument mymsg 
@@ -34,9 +34,10 @@ class TestEncryption(unittest.TestCase):
         self.assertNotIn(self.mymsg, msgEncrypt(self.mymsg))
 
     #Test 6 Checking if encrypted string actually shifts the characters by one or not
+    #Test 7 Testing encryption other inputs
     def test_checkshift(self):
         check = string.ascii_letters + string.punctuation + string.digits + " "
-        encryptedmsg = "".join([check[check.find(char)+1] for i,char in enumerate(self.mymsg)])
+        encryptedmsg = "".join([check[check.find(char)+1] if len(check) > (check.find(char)+1) else check[0] for i,char in enumerate(self.mymsg)])
         print(encryptedmsg)
         self.assertEqual(encryptedmsg, msgEncrypt(self.mymsg))
 
